@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/assets/favicon-CN3CzDPv.png">
+    <title>To Do List</title>
+  <link rel="stylesheet" crossorigin href="/assets/index-DyyNHttT.css">
+</head>
+
+<body class="bg-img bg-cover h-screen w-screen font-mono" style="background-image: url('/assets/bg-C_IZnOoK.jpeg')">
+  
+    <div class="text-center text-5xl font-bold text-white p-2 bg-purple-1000">
+        <span>TO-DO LIST</span>
+    </div>
+    <div class="flex justify-center">
+        <div id="container" class="bg-white w-1/4 h-[500px] my-20 rounded-lg">
+
+        </div>
+        <div class="h-[500px] my-20 mx-20 flex flex-col">
+            <textarea id="newTask" rows="4" cols="40" placeholder="Write your task here"
+                class="rounded-lg p-2"></textarea>
+
+            <button id="submitBtn"
+                class="bg-green-500 font-semibold text-white my-3 p-2 rounded-md hover:bg-green-700">Add Task</button>
+
+            <div class="bg-white h-[150px] mt-[170px] rounded-lg text-center p-5">
+                <h1 class="text-3xl"><span id="done-tasks" class="font-bold"> 0 </span> OUT OF <span id="total-tasks" class="font-bold"> 0 </span></h1>
+                <h1 class="text-3xl my-8">TASKS DONE</h1>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const task = document.getElementById('newTask');
+        const submit = document.getElementById('submitBtn');
+        const totalTasks = document.getElementById('total-tasks');
+        const doneTasks = document.getElementById('done-tasks');
+
+        let no_of_tasks = 0;
+        let completed_tasks = 0;
+
+        submit.addEventListener('click', () => {
+            const message = task.value;
+            task.value = "";
+            
+            if(message != ""){
+                no_of_tasks++;
+
+                const newTask = document.createElement('div');
+                newTask.textContent = message;
+                newTask.classList.add('bg-gray-200', 'p-4', 'rounded', 'flex', 'items-center', 'justify-between');  
+                const doneBtn = document.createElement('button');
+                doneBtn.textContent = "Done";
+                doneBtn.classList.add('bg-green-300', 'p-2', 'rounded', 'hover:bg-green-400');
+                doneBtn.addEventListener('click', ()=>{
+                    doneBtn.disabled = true;
+                    doneBtn.classList.add('bg-gray-800', 'text-white');
+                    doneBtn.innerText = "Completed";
+                    completed_tasks++;
+                    doneTasks.innerText = completed_tasks;
+                })
+                newTask.appendChild(doneBtn);
+                container.appendChild(newTask);
+            }
+
+            totalTasks.innerText = no_of_tasks;
+        });
+    </script>
+</body>
+
+</html>
